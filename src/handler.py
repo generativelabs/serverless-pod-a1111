@@ -35,6 +35,7 @@ def run_inference(params):
         "api": {
             "txt2img":  ("POST", "/sdapi/v1/txt2img"),
             "img2img":  ("POST", "/sdapi/v1/img2img"),
+            "png-info": ("POST", "/sdapi/v1/png-info"),
             "getModels": ("GET", "/sdapi/v1/sd-models"),
             "getOptions": ("GET", "/sdapi/v1/options"),
             "setOptions": ("POST", "/sdapi/v1/options"),
