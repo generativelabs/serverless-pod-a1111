@@ -11,7 +11,7 @@ WORKDIR /
 RUN apt-get update && \
     apt-get upgrade -y && \
     apt install -y \
-    fonts-dejavu-core rsync git jq moreutils aria2 wget libgoogle-perftools-dev procps dos2unix && \
+    fonts-dejavu-core rsync git jq moreutils aria2 wget libgoogle-perftools-dev procps && \
     apt-get autoremove -y && rm -rf /var/lib/apt/lists/* && apt-get clean -y
 
 # Install Python dependencies (Worker Template)
@@ -23,12 +23,6 @@ RUN pip install --upgrade pip && \
 # Add src files (Worker Template)
 ADD src .
 
-# Convert line endings for start.sh
-RUN dos2unix /start.sh
-
-# Make the script executable
-RUN chmod +x /start.sh
-
 # Cleanup section (Worker Template)
 RUN apt-get autoremove -y && \
     apt-get clean -y && \
@@ -38,7 +32,5 @@ RUN apt-get autoremove -y && \
 RUN rm -rf /workspace && \
     ln -s /runpod-volume /workspace
 
-# Redundant; removing
-# ADD src .
-
-# Your existing CMD or ENTRYPOINT, if any
+ADD src .
+RUN chmod +x /start.sh
